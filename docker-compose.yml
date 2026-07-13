@@ -15,7 +15,7 @@ services:
       MODEL_NAME: sleepstage-serving
 
   fastapi:
-    image: <dockerhub-username>/sleep-ai-fastapi:latest
+    image: anhvy3008/sleep-ai-fastapi:latest
     build: .
 
     ports:
