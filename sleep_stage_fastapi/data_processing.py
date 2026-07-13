@@ -372,7 +372,7 @@ def generator_test_single_hsat_padding(main_folder, subject_id, n_classes, n_epo
 
     ppg_files.sort()
     acc_files.sort()
-
+    print(os.path.join(main_folder, subject_id))
     print(ppg_files[0])
     _, first_ppg_start_time, _ = read_signals(ppg_files[0], 'ppg')
     _, _, last_ppg_end_time = read_signals(ppg_files[-1], 'ppg')
