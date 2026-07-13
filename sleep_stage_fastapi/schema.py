@@ -1,0 +1,35 @@
+from pydantic import BaseModel
+
+class SleepStageRequest(BaseModel):
+    record_id: str
+
+DATA_FOLDER = "sample_data/sleep_test"
+N_CLASSES = 3
+
+MAX_BATCHSIZE = 8
+FS_PPG = 128
+FS_HR = 2
+PPG_N_CHANNELS = 2
+ACC_N_CHANNELS = 3
+FS_ACC = 25
+
+FS_PPG_AUGMENT = 64
+
+HR_MAX_THR = 250
+HR_MIN_THR = 25
+
+FS_SPO2 = 1
+
+SECOND_IN_MINUTE = 60
+RR_MIN_THR = SECOND_IN_MINUTE * FS_PPG / HR_MAX_THR
+RR_MAX_THR = SECOND_IN_MINUTE * FS_PPG / HR_MIN_THR
+
+THR_DURATION_DATA = int(45*60) # 45 mins
+THR_PERCENT = 70
+
+FS_MOVEMENT = 1
+
+PPG_SEG_TIME = 4
+
+PPG_STRIDE = 0.5
+PPG_SPO2_STRIDE = 1

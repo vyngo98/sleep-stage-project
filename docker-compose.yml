@@ -1,0 +1,29 @@
+services:
+
+  tfserving:
+
+    image: tensorflow/serving
+
+    ports:
+      - "8500:8500"
+      - "8501:8501"
+
+    volumes:
+      - ./model/ppg_acc_3classes_norm_hsat_improvedcoattention_250_Cate_v18r/serving_model:/models/sleepstage-serving
+
+    environment:
+      MODEL_NAME: sleepstage-serving
+
+  fastapi:
+
+    build: .
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - tfserving
+
+    volumes:
+      - ./sample_data/sleep_test:/sample_data/sleep_test
+      - ./sample_data/extract_sleep_label:/sample_data/extract_sleep_label
