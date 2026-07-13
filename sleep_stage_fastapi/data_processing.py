@@ -419,7 +419,7 @@ def generator_test_single_hsat_padding(main_folder, subject_id, n_classes, n_epo
     total_ppg = np.array(total_ppg)
     total_acc = np.array(total_acc)
 
-    label_path = "/sample/extract_sleep_label"
+    label_path = "/sample_data/extract_sleep_label"
     sleep_stage_label = os.path.join(label_path, subject_id + ".csv")
     sleep_stage_df = pd.read_csv(sleep_stage_label)
 
