@@ -3,7 +3,7 @@ from pydantic import BaseModel
 class SleepStageRequest(BaseModel):
     record_id: str
 
-DATA_FOLDER = "sample_data/sleep_test"
+DATA_FOLDER = "/sample_data/sleep_test"
 N_CLASSES = 3
 
 MAX_BATCHSIZE = 8
