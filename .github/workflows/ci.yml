@@ -54,6 +54,11 @@ jobs:
         run: |
           python sleep_stage_fastapi/client_test.py
 
+      - name: Show FastAPI Logs
+        if: always()
+        run: |
+          docker compose logs fastapi
+
       - name: Show Logs
         if: failure()
         run: |
