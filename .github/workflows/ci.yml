@@ -1,0 +1,65 @@
+name: Sleep AI CI
+
+on:
+
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  jobs:
+    integration-test:
+      runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Docker Version
+      run: |
+        docker --version
+        docker compose version
+
+    - name: Build Containers
+      run: |
+        docker compose build
+
+    - name: Start Containers
+      run: |
+        docker compose up -d
+
+    - name: Show Containers
+      run: |  
+        docker ps
+
+    - name: Wait until TF Serving Ready
+      run: |
+        until curl http://localhost:8501/v1/models/sleepstage-serving
+        do
+          echo "Waiting..."
+          sleep 2
+        done
+
+    - name: Wait FastAPI
+      run: |
+        until curl http://localhost:8000/docs
+        do
+          sleep 2
+        done
+
+    - name: Run Integration Test
+      run: |
+        python sleep_stage_fastapi/client_test.py
+
+    - name: Show Logs
+      if: failure()
+      run: |
+        docker compose logs
+
+    - name: Stop Containers
+      if: always()
+      run: |
+        docker compose down

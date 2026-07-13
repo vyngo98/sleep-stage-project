@@ -1,6 +1,6 @@
 FROM python:3.11
 
-WORKDIR /sleep_stage_fast_api
+WORKDIR /sleep_stage_fastapi
 
 COPY requirements.txt .
 
